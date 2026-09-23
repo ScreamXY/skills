@@ -1,0 +1,13 @@
+{
+  "name": "scrm-eli5",
+  "version": "1.0.0",
+  "description": "Explain a topic very simply, with one HTML page of big pictures and few words.",
+  "author": {
+    "name": "ScreamXY",
+    "url": "https://github.com/ScreamXY"
+  },
+  "homepage": "https://github.com/ScreamXY/skills",
+  "repository": "https://github.com/ScreamXY/skills",
+  "license": "Apache-2.0",
+  "keywords": ["explain", "eli5", "html", "visual"]
+}

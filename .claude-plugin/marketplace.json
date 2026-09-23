@@ -1,0 +1,61 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "scrm",
+  "owner": {
+    "name": "ScreamXY",
+    "url": "https://github.com/ScreamXY"
+  },
+  "metadata": {
+    "description": "Personal skills of ScreamXY for Claude Code and Codex"
+  },
+  "plugins": [
+    {
+      "name": "scrm-show-me",
+      "source": "./plugins/scrm-show-me",
+      "description": "Explain the current topic visually with small diagrams, code-shape sketches, and focused HTML pages.",
+      "category": "productivity"
+    },
+    {
+      "name": "scrm-grill-me",
+      "source": "./plugins/scrm-grill-me",
+      "description": "Stress-test a plan or design with rounds of numbered questions, each with a recommended answer.",
+      "category": "productivity"
+    },
+    {
+      "name": "scrm-grill-with-docs",
+      "source": "./plugins/scrm-grill-with-docs",
+      "description": "Stress-test a plan or design and keep the glossary (CONTEXT.md) and ADRs up to date while you talk.",
+      "category": "productivity"
+    },
+    {
+      "name": "scrm-wait-what",
+      "source": "./plugins/scrm-wait-what",
+      "description": "Explain the last message again in simple words, with the context that was missing.",
+      "category": "productivity"
+    },
+    {
+      "name": "scrm-handoff",
+      "source": "./plugins/scrm-handoff",
+      "description": "Compact the current conversation into a handoff document for a fresh agent session.",
+      "category": "productivity"
+    },
+    {
+      "name": "scrm-unslop",
+      "source": "./plugins/scrm-unslop",
+      "description": "Remove AI writing patterns from a text and rewrite it in plain, direct English.",
+      "category": "productivity"
+    },
+    {
+      "name": "scrm-eli5",
+      "source": "./plugins/scrm-eli5",
+      "description": "Explain a topic very simply, with one HTML page of big pictures and few words.",
+      "category": "productivity"
+    },
+    {
+      "name": "scrm-babysit-pr",
+      "source": "./plugins/scrm-babysit-pr",
+      "description": "Watch a GitHub or Azure DevOps pull request for a time window: handle review comments, fix valid findings, and follow CI.",
+      "category": "development"
+    }
+  ]
+}

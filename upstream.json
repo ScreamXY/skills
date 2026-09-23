@@ -1,0 +1,74 @@
+{
+  "scrm-show-me": [
+    {
+      "repo": "humanlayer/skills",
+      "path": "plugins/show-me/skills/show-me",
+      "commit": "bba9d13ab34f0a87f1cc33df4dd196372393ddfc"
+    }
+  ],
+  "scrm-grill-me": [
+    {
+      "repo": "mattpocock/skills",
+      "path": "skills/productivity/grill-me",
+      "commit": "fcf0071560d32913c9d4f820e0d7ca467c881619"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "path": "skills/productivity/grilling",
+      "commit": "85f83d3fde1d3a90d5c9a657f6998c79a6c37308"
+    }
+  ],
+  "scrm-grill-with-docs": [
+    {
+      "repo": "mattpocock/skills",
+      "path": "skills/engineering/grill-with-docs",
+      "commit": "447ca70872026d5b79d6073a546dac082117fed7"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "path": "skills/productivity/grilling",
+      "commit": "85f83d3fde1d3a90d5c9a657f6998c79a6c37308"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "path": "skills/engineering/domain-modeling",
+      "commit": "321658273cb1d20b76026717d027d505790106d4"
+    }
+  ],
+  "scrm-wait-what": [
+    {
+      "repo": "mattpocock/skills",
+      "path": "skills/productivity/wait-what",
+      "commit": "5c89081d4bbeb3d039a42093653f90bb698d780e"
+    }
+  ],
+  "scrm-handoff": [
+    {
+      "repo": "mattpocock/skills",
+      "path": "skills/productivity/handoff",
+      "commit": "d28dfdc39beadc3142a33359b5cfa4765dcbd0bc"
+    }
+  ],
+  "scrm-unslop": [
+    {
+      "repo": "cursor/plugins",
+      "path": "pstack/skills/unslop",
+      "commit": "70b2dc8b4b85c8d5648624ca40d692c421fff32f"
+    }
+  ],
+  "scrm-eli5": [
+    {
+      "repo": "anthropics/claude-plugins-community",
+      "path": "eli5/skills/eli5",
+      "commit": "794af9e63d07fad17087dcab61f21f44cb48effd"
+    }
+  ],
+  "scrm-babysit-pr": [
+    {
+      "repo": "POLYPOINT/skills",
+      "path": "skills/babysit-pr",
+      "commit": "a58e63c28c4f0452626b612577adc752d74899c4",
+      "note": "Idea only. The source is proprietary, so no text is copied."
+    }
+  ]
+}

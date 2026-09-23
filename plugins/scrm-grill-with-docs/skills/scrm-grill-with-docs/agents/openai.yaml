@@ -1,0 +1,6 @@
+interface:
+  display_name: 'scrm Grill With Docs'
+  short_description: 'Grill a design and write its docs'
+  default_prompt: 'Use $scrm-grill-with-docs to grill me on this design.'
+policy:
+  allow_implicit_invocation: false

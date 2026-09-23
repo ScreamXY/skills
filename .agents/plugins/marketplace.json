@@ -1,0 +1,104 @@
+{
+  "name": "scrm",
+  "interface": {
+    "displayName": "scrm skills"
+  },
+  "plugins": [
+    {
+      "name": "scrm-show-me",
+      "source": {
+        "source": "local",
+        "path": "./plugins/scrm-show-me"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "scrm-grill-me",
+      "source": {
+        "source": "local",
+        "path": "./plugins/scrm-grill-me"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "scrm-grill-with-docs",
+      "source": {
+        "source": "local",
+        "path": "./plugins/scrm-grill-with-docs"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "scrm-wait-what",
+      "source": {
+        "source": "local",
+        "path": "./plugins/scrm-wait-what"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "scrm-handoff",
+      "source": {
+        "source": "local",
+        "path": "./plugins/scrm-handoff"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "scrm-unslop",
+      "source": {
+        "source": "local",
+        "path": "./plugins/scrm-unslop"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "scrm-eli5",
+      "source": {
+        "source": "local",
+        "path": "./plugins/scrm-eli5"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "scrm-babysit-pr",
+      "source": {
+        "source": "local",
+        "path": "./plugins/scrm-babysit-pr"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: 'scrm Wait What'
+  short_description: 'Say that again, simpler'
+  default_prompt: 'Use $scrm-wait-what to explain your last message again.'
+policy:
+  allow_implicit_invocation: false

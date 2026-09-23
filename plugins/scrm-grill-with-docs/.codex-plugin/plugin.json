@@ -1,0 +1,22 @@
+{
+  "name": "scrm-grill-with-docs",
+  "version": "1.0.0",
+  "description": "Stress-test a plan or design and keep the glossary (CONTEXT.md) and ADRs up to date while you talk.",
+  "author": {
+    "name": "ScreamXY",
+    "url": "https://github.com/ScreamXY"
+  },
+  "homepage": "https://github.com/ScreamXY/skills",
+  "repository": "https://github.com/ScreamXY/skills",
+  "license": "MIT",
+  "keywords": ["planning", "design", "domain-modeling", "adr", "glossary"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "scrm Grill With Docs",
+    "shortDescription": "Grill a design and write its docs",
+    "developerName": "ScreamXY",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": ["Use $scrm-grill-with-docs to grill me on this design."]
+  }
+}

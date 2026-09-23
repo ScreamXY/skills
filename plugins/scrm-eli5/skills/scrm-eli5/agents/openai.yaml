@@ -1,0 +1,6 @@
+interface:
+  display_name: 'scrm ELI5'
+  short_description: 'Explain it with big pictures'
+  default_prompt: 'Use $scrm-eli5 to explain this topic.'
+policy:
+  allow_implicit_invocation: true

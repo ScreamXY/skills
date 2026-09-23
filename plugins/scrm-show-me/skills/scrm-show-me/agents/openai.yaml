@@ -1,0 +1,6 @@
+interface:
+  display_name: 'scrm Show Me'
+  short_description: 'Explain the current topic visually'
+  default_prompt: 'Use $scrm-show-me to show me how this works.'
+policy:
+  allow_implicit_invocation: false

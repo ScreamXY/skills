@@ -1,0 +1,14 @@
+{
+  "name": "scrm-skills",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "upstream": "node scripts/check-upstream.mjs",
+    "format": "prettier --write .",
+    "check": "node scripts/validate.mjs && prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}

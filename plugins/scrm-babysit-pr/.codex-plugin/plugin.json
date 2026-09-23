@@ -1,0 +1,22 @@
+{
+  "name": "scrm-babysit-pr",
+  "version": "1.0.0",
+  "description": "Watch a GitHub or Azure DevOps pull request for a time window: handle review comments, fix valid findings, and follow CI.",
+  "author": {
+    "name": "ScreamXY",
+    "url": "https://github.com/ScreamXY"
+  },
+  "homepage": "https://github.com/ScreamXY/skills",
+  "repository": "https://github.com/ScreamXY/skills",
+  "license": "MIT",
+  "keywords": ["pull-request", "code-review", "ci", "github", "azure-devops"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "scrm Babysit PR",
+    "shortDescription": "Watch a PR, fix review findings",
+    "developerName": "ScreamXY",
+    "category": "Developer Tools",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": ["Use $scrm-babysit-pr to babysit this pull request for an hour."]
+  }
+}

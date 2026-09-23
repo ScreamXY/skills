@@ -1,0 +1,22 @@
+{
+  "name": "scrm-show-me",
+  "version": "1.0.0",
+  "description": "Explain the current topic visually with small diagrams, code-shape sketches, and focused HTML pages.",
+  "author": {
+    "name": "ScreamXY",
+    "url": "https://github.com/ScreamXY"
+  },
+  "homepage": "https://github.com/ScreamXY/skills",
+  "repository": "https://github.com/ScreamXY/skills",
+  "license": "MIT",
+  "keywords": ["visualization", "diagrams", "mermaid", "html"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "scrm Show Me",
+    "shortDescription": "Explain the current topic visually",
+    "developerName": "ScreamXY",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": ["Use $scrm-show-me to show me how this works."]
+  }
+}

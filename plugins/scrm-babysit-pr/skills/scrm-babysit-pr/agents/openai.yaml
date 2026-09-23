@@ -1,0 +1,6 @@
+interface:
+  display_name: 'scrm Babysit PR'
+  short_description: 'Watch a PR, fix review findings'
+  default_prompt: 'Use $scrm-babysit-pr to babysit this pull request for an hour.'
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,22 @@
+{
+  "name": "scrm-grill-me",
+  "version": "1.0.0",
+  "description": "Stress-test a plan or design with rounds of numbered questions, each with a recommended answer.",
+  "author": {
+    "name": "ScreamXY",
+    "url": "https://github.com/ScreamXY"
+  },
+  "homepage": "https://github.com/ScreamXY/skills",
+  "repository": "https://github.com/ScreamXY/skills",
+  "license": "MIT",
+  "keywords": ["planning", "design", "interview"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "scrm Grill Me",
+    "shortDescription": "Sharpen a plan through interview",
+    "developerName": "ScreamXY",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": ["Use $scrm-grill-me to grill me on this plan."]
+  }
+}

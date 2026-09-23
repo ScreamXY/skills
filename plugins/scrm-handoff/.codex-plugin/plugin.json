@@ -1,0 +1,22 @@
+{
+  "name": "scrm-handoff",
+  "version": "1.0.0",
+  "description": "Compact the current conversation into a handoff document for a fresh agent session.",
+  "author": {
+    "name": "ScreamXY",
+    "url": "https://github.com/ScreamXY"
+  },
+  "homepage": "https://github.com/ScreamXY/skills",
+  "repository": "https://github.com/ScreamXY/skills",
+  "license": "MIT",
+  "keywords": ["handoff", "context", "session"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "scrm Handoff",
+    "shortDescription": "Compact a conversation into a handoff",
+    "developerName": "ScreamXY",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": ["Use $scrm-handoff to write a handoff for the next session."]
+  }
+}

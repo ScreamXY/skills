@@ -1,0 +1,6 @@
+interface:
+  display_name: 'scrm Unslop'
+  short_description: 'Cut AI tells from writing'
+  default_prompt: 'Use $scrm-unslop to clean up this text.'
+policy:
+  allow_implicit_invocation: false
