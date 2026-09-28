@@ -1,0 +1,23 @@
+{
+  "name": "scrm-video",
+  "version": "1.0.0",
+  "description": "Edit holiday and action films with chronological storytelling, music, transitions, photo motion, and private or masked public versions.",
+  "author": {
+    "name": "ScreamXY",
+    "url": "https://github.com/ScreamXY"
+  },
+  "homepage": "https://github.com/ScreamXY/skills",
+  "repository": "https://github.com/ScreamXY/skills",
+  "license": "MIT",
+  "keywords": ["video", "holiday", "editing", "transitions", "comic-masks"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "scrm Video",
+    "shortDescription": "Edit holiday films and masked public versions",
+    "developerName": "ScreamXY",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": ["Use $scrm-video to edit these holiday photos and videos into private and public films."],
+    "longDescription": "Create or revise personal holiday and action films. Keep capture dates in order, use music and real transitions, animate still photos, and prepare matching private and public edits with fitted comic masks. Includes export and mask review guidance."
+  }
+}

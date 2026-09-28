@@ -1,0 +1,6 @@
+interface:
+  display_name: 'scrm Video'
+  short_description: 'Edit holiday films and masked public versions'
+  default_prompt: 'Use $scrm-video to edit these holiday photos and videos into private and public films.'
+policy:
+  allow_implicit_invocation: false

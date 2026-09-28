@@ -56,6 +56,12 @@
       "source": "./plugins/scrm-babysit-pr",
       "description": "Watch a GitHub or Azure DevOps pull request for a time window: handle review comments, fix valid findings, and follow CI.",
       "category": "development"
+    },
+    {
+      "name": "scrm-video",
+      "source": "./plugins/scrm-video",
+      "description": "Edit holiday and action films with chronological storytelling, music, transitions, photo motion, and private or masked public versions.",
+      "category": "productivity"
     }
   ]
 }
