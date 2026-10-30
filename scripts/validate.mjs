@@ -1,8 +1,9 @@
 // Checks that every plugin follows the repo rules in AGENTS.md. Exits with 1 on any error.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('..', import.meta.url).pathname;
+const root = fileURLToPath(new URL('..', import.meta.url));
 const LANGUAGE_SECTION =
   "## Language\n\nEnglish is the user's second language. Use short sentences and common words. Avoid idioms and slang. Technical terms are fine.";
 const errors = [];
@@ -29,6 +30,9 @@ const frontmatter = (text) => {
   return fields;
 };
 
+const yamlValue = (text, key) =>
+  text.match(new RegExp(`^\\s*${key}:\\s*(.*)$`, 'm'))?.[1].replace(/^(['"])(.*)\1$/, '$2');
+
 const claudeMarket = readJson('.claude-plugin/marketplace.json');
 const codexMarket = readJson('.agents/plugins/marketplace.json');
 const upstream = readJson('upstream.json');
@@ -38,6 +42,10 @@ const plugins = readdirSync(join(root, 'plugins')).filter((name) => !name.starts
 for (const name of plugins) {
   const base = `plugins/${name}`;
   const skillDir = `${base}/skills/${name}`;
+  const claudeEntry = claudeMarket.plugins.find((p) => p.name === name);
+  const codexEntry = codexMarket.plugins.find((p) => p.name === name);
+  const openaiPath = join(root, skillDir, 'agents/openai.yaml');
+  const openai = existsSync(openaiPath) ? readFileSync(openaiPath, 'utf8') : null;
   check(/^scrm-[a-z0-9-]+$/.test(name), `${name}: name must be "scrm-" plus kebab-case`);
 
   const manifests = ['.claude-plugin', '.codex-plugin'].map((dir) => `${base}/${dir}/plugin.json`);
@@ -48,7 +56,20 @@ for (const name of plugins) {
     check(claude.name === name && codex.name === name, `${name}: plugin.json names must match the folder`);
     check(claude.version === codex.version, `${name}: versions differ (${claude.version} vs ${codex.version})`);
     check(claude.description === codex.description, `${name}: plugin.json descriptions differ`);
+    check(
+      !claudeEntry || claudeEntry.description === claude.description,
+      `${name}: description in .claude-plugin/marketplace.json differs from plugin.json`,
+    );
     check(codex.skills === './skills/', `${name}: .codex-plugin/plugin.json needs "skills": "./skills/"`);
+    if (openai) {
+      const ui = codex.interface ?? {};
+      check(
+        yamlValue(openai, 'display_name') === ui.displayName &&
+          yamlValue(openai, 'short_description') === ui.shortDescription &&
+          yamlValue(openai, 'default_prompt') === ui.defaultPrompt?.[0],
+        `${name}: agents/openai.yaml interface differs from .codex-plugin/plugin.json`,
+      );
+    }
   }
 
   const skillPath = join(root, skillDir, 'SKILL.md');
@@ -68,17 +89,16 @@ for (const name of plugins) {
     check(existsSync(join(dirname(skillPath), link)), `${name}: broken link ${link}`);
   }
 
-  const openaiPath = join(root, skillDir, 'agents/openai.yaml');
-  if (existsSync(openaiPath)) {
-    const implicit = readFileSync(openaiPath, 'utf8').match(/allow_implicit_invocation:\s*(true|false)/)?.[1];
+  if (openai) {
     const manualOnly = fields['disable-model-invocation'] === 'true';
-    check(implicit === String(!manualOnly), `${name}: allow_implicit_invocation must be ${!manualOnly}`);
+    check(
+      yamlValue(openai, 'allow_implicit_invocation') === String(!manualOnly),
+      `${name}: allow_implicit_invocation must be ${!manualOnly}`,
+    );
   } else {
     errors.push(`${name}: missing ${skillDir}/agents/openai.yaml`);
   }
 
-  const claudeEntry = claudeMarket.plugins.find((p) => p.name === name);
-  const codexEntry = codexMarket.plugins.find((p) => p.name === name);
   check(claudeEntry?.source === `./${base}`, `${name}: missing or wrong in .claude-plugin/marketplace.json`);
   check(codexEntry?.source?.path === `./${base}`, `${name}: missing or wrong in .agents/plugins/marketplace.json`);
   check(name in upstream, `${name}: missing in upstream.json (use [] for a skill without a source)`);

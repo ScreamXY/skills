@@ -1,6 +1,6 @@
 ---
 name: scrm-wait-what
-description: Use when the user did not understand your last message, e.g. "wait, what?", "I don't get it", "say that again, simpler". Explains the last message again, with the missing context,, in Simplified Technical English and the project's own words.
+description: Use when the user did not understand your last message, e.g. "wait, what?", "I don't get it", "say that again, simpler". Explains the last message again, with the missing context, in Simplified Technical English and the project's own words.
 disable-model-invocation: true
 ---
 

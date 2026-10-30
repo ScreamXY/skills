@@ -1,6 +1,6 @@
 {
   "name": "scrm-babysit-pr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Watch a GitHub or Azure DevOps pull request for a time window: handle review comments, fix valid findings, and follow CI.",
   "author": {
     "name": "ScreamXY",

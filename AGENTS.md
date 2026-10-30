@@ -39,4 +39,6 @@ claude plugin validate plugins/<name>    # one plugin
 npm run upstream                         # which sources changed
 ```
 
+CI (`.github/workflows/check.yml`) runs `npm run check` on every push to `main` and every pull request.
+
 For bigger changes, also ask for a review with the `plugin-dev:skill-reviewer` and `plugin-dev:plugin-validator` agents.

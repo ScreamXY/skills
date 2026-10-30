@@ -16,13 +16,19 @@ import sys
 import tempfile
 import time
 import urllib.parse
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 AI_MARKER = 'scrm-babysit-pr'
 PENDING = {'queued', 'in_progress', 'waiting', 'pending', 'requested', 'expected', 'running'}
+PASSED = {'success', 'approved', 'skipped', 'neutral', 'notapplicable'}
 AZURE_VOTES = {10: 'approved', 5: 'approved with suggestions', 0: 'no vote', -5: 'waiting for author', -10: 'rejected'}
 AZURE_STATES = {'active': 'open', 'completed': 'merged', 'abandoned': 'closed'}
 MAX_FAILURES = 3
+
+PR = dict[str, Any]
+Snapshot = dict[str, Any]
 
 GITHUB_QUERY = """
 query($owner: String!, $repo: String!, $number: Int!) {
@@ -50,14 +56,14 @@ query($owner: String!, $repo: String!, $number: Int!) {
 """
 
 
-def run_json(cmd):
+def run_json(cmd: list[str]) -> Any:
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
         raise RuntimeError(f"{' '.join(cmd[:4])} failed: {result.stderr.strip()[:300]}")
     return json.loads(result.stdout)
 
 
-def parse_url(url):
+def parse_url(url: str) -> PR:
     parts = urllib.parse.urlparse(url)
     path = [urllib.parse.unquote(p) for p in parts.path.split('/') if p]
     if parts.netloc == 'github.com' and len(path) >= 4 and path[2] == 'pull':
@@ -71,7 +77,7 @@ def parse_url(url):
     sys.exit(f'Unsupported PR URL: {url}')
 
 
-def comment(author, where, body):
+def comment(author: str, where: str, body: str | None) -> dict[str, Any]:
     lines = (body or '').strip().splitlines()
     text = ' '.join((body or '').split())
     return {
@@ -83,14 +89,14 @@ def comment(author, where, body):
     }
 
 
-def github_snapshot(pr):
+def github_snapshot(pr: PR) -> Snapshot:
     data = run_json([
         'gh', 'api', 'graphql', '-f', f'query={GITHUB_QUERY}',
         '-f', f"owner={pr['owner']}", '-f', f"repo={pr['repo']}", '-F', f"number={pr['number']}",
     ])
     p = data['data']['repository']['pullRequest']
 
-    def login(node):
+    def login(node: dict[str, Any]) -> str:
         return (node.get('author') or {}).get('login', 'ghost')
 
     comments, threads, votes, checks = {}, {}, {}, {}
@@ -127,7 +133,7 @@ def github_snapshot(pr):
     }
 
 
-def azure_snapshot(pr):
+def azure_snapshot(pr: PR) -> Snapshot:
     base = ['--org', pr['org'], '-o', 'json']
     info = run_json(['az', 'repos', 'pr', 'show', '--id', str(pr['number'])] + base)
     project = info['repository']['project']['name']
@@ -172,12 +178,12 @@ def azure_snapshot(pr):
     }
 
 
-def format_comment(cid, c):
+def format_comment(cid: str, c: dict[str, Any]) -> str:
     tag = ' [ai]' if c['ai'] else ''
     return f"COMMENT {cid} by {c['author']}{tag} on {c['where']}: {c['text']}"
 
 
-def diff(old, new):
+def diff(old: Snapshot, new: Snapshot) -> list[str]:
     events = []
     if old['head'] != new['head']:
         events.append(f"NEW COMMIT {new['head'][:8]}")
@@ -204,10 +210,14 @@ def diff(old, new):
     return events
 
 
-def print_baseline(url, snap, deadline):
+def clock(timestamp: float) -> str:
+    return time.strftime('%H:%M', time.localtime(timestamp))
+
+
+def print_baseline(url: str, snap: Snapshot, deadline: float) -> None:
     print(f'BASELINE {url}')
     print(f"state={snap['state']} draft={str(snap['draft']).lower()} head={snap['head'][:8]} merge={snap['merge']}")
-    failing = [f"'{n}' {s}" for n, s in snap['checks'].items() if s not in PENDING | {'success', 'approved', 'skipped', 'neutral', 'notapplicable'}]
+    failing = [f"'{n}' {s}" for n, s in snap['checks'].items() if s not in PENDING | PASSED]
     pending = [n for n, s in snap['checks'].items() if s in PENDING]
     print(f"CHECKS {len(snap['checks'])} total, {len(pending)} pending, failing: {', '.join(failing) or 'none'}")
     open_threads = [tid for tid, s in snap['threads'].items() if s in ('open', 'active', 'pending')]
@@ -219,10 +229,10 @@ def print_baseline(url, snap, deadline):
             print(f"  thread {tid}: last by {c['author']}{' [ai]' if c['ai'] else ''} on {path}: {c['text']}")
     if snap['votes']:
         print('VOTES ' + ', '.join(f'{who}: {vote}' for who, vote in snap['votes'].items()))
-    print(f"WATCHING until {time.strftime('%H:%M', time.localtime(deadline))}")
+    print(f'WATCHING until {clock(deadline)}')
 
 
-def poll(take, pr):
+def poll(take: Callable[[PR], Snapshot], pr: PR) -> Snapshot:
     for attempt in range(1, MAX_FAILURES + 1):
         try:
             return take(pr)
@@ -234,7 +244,7 @@ def poll(take, pr):
             time.sleep(10)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('url', help='PR URL (github.com or dev.azure.com / *.visualstudio.com)')
     parser.add_argument('--minutes', type=float, help='watch window from now; sets or extends the deadline (default 60)')
@@ -251,7 +261,7 @@ def main():
     if args.reset:
         state_file.unlink(missing_ok=True)
 
-    def save(snap, deadline):
+    def save(snap: Snapshot, deadline: float) -> None:
         state_file.write_text(json.dumps({'deadline': deadline, 'snapshot': snap}))
 
     if not state_file.exists():
@@ -276,7 +286,7 @@ def main():
             print(f"DONE the PR is {current['state']}")
             return
         if events:
-            print(f"WATCHING until {time.strftime('%H:%M', time.localtime(deadline))}")
+            print(f'WATCHING until {clock(deadline)}')
             return
         if time.time() >= deadline:
             print('DEADLINE reached')

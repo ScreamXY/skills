@@ -14,7 +14,7 @@ English is the user's second language. Use short sentences and common words. Avo
 
 Treat these as the user's defaults. A new request can override them.
 
-- Show good times, family moments, and action. Give quiet scenes room to breathe.
+- Show good times, family moments, and action. Give quiet scenes enough time.
 - Keep days in capture order. Put hiking, cycling, and climbing in their real sequence. Do not move an earlier day's scenery to the ending or preview later days at the start unless requested.
 - Use more of the useful b-roll: paths, scenery, details, travel, and small moments. A longer film is welcome when the added footage adds something.
 - Use real transitions between shots, timed to the action and music. Mix dissolves with restrained slides, wipes, zooms, or whip transitions. Keep direct cuts where they suit the scene.

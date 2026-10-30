@@ -1,6 +1,6 @@
 {
   "name": "scrm-wait-what",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Explain the last message again in simple words, with the context that was missing.",
   "author": {
     "name": "ScreamXY",
